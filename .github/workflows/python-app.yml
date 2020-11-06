@@ -20,7 +20,7 @@ jobs:
       - name: testing
         env:
                 KEY_API_KANBANIZE: ${{secrets.API_TOKEN_KANBANIZE}}
-        run: chmod +x ./github/workflows/parser.py && python3 ./github/workflows/parser.py '${{ toJSON(github.event.commits.*.message) }}'
+        run: chmod +x ./github/workflows/parse.py && python3 ./github/workflows/parse.py '${{ toJSON(github.event.commits.*.message) }}'
 #    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
 #    steps:
 #    - uses: actions/checkout@v2
