@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: testing
         run: |
-          echo "${{ toJSON(github.event.commits.*.message) }}"
+          apt update && apt install -y jq && echo "'${{ toJSON(github.event.commits.*.message) }}' | jq '.[0]' "
 #    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
 #    steps:
 #    - uses: actions/checkout@v2
