@@ -7,7 +7,8 @@ import json
 p = re.compile("\[[kK][bB]-(\d+)\]")
 
 labels = json.loads(sys.argv[1])
-
+print(labels)
+exit(0)
 url = "https://wiris.kanbanize.com/index.php/api/kanbanize/add_comment/"
 
 for label in labels:
@@ -15,7 +16,7 @@ for label in labels:
     for match in o: 
         filtered_commit_message = p.sub("",label).strip()
         taskid = match.groups()[0]
-        
+       
+        # todo: add link to commit or repo and include who made the commit
         requests.post(url, json={"taskid": taskid, "comment": filtered_commit_message}, headers={"apikey": os.environ["KEY_API_KANBANIZE"]})
-#        print(taskid, filtered_commit_message)
 
