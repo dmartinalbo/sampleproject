@@ -14,9 +14,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-python@v2
+        with:
+                python-version: 3.8.3
       - name: testing
-        run: |
-          sudo apt update && sudo apt install -y jq && echo '${{ toJSON(github.event.commits.*.message) }}' | jq '.[0]'
+        env:
+                KEY_API_KANBANIZE: ${{secrets.API_TOKEN_KANBANIZE}}
+        run: chmod +x ./github/workflows/parser.py && python3 ./github/workflows/parser.py '${{ toJSON(github.event.commits.*.message) }}'
 #    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
 #    steps:
 #    - uses: actions/checkout@v2
