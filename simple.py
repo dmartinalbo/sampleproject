@@ -5,6 +5,7 @@ from typing import List
 
 from pydantic import BaseModel
 
+
 class Foo(BaseModel):
     count: int
     size: float = None
